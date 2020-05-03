@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil Bibliothèque</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <h1>Application Bibliothèque</h1>
+    <div class="row">
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li th:if="${currentPage == 1}" class="page-item disabled">
+                    <a class="page-link" th:href="@{/(page=${currentPage - 1})}">Précédent</a>
+                </li>
+                <li th:if="${currentPage != 1}" class="page-item">
+                    <a class="page-link" th:href="@{/(page=${currentPage - 1})}">Précédent</a>
+                </li>
+                <th:block th:each="pageNumber : ${pageNumbers}">
+                    <li th:if="${currentPage == pageNumber}" class="page-item active">
+                        <a th:text="${pageNumber}" class="page-link" th:href="@{/(page=${pageNumber})}">100</a>
+                    </li>
+                    <li th:if="${currentPage != pageNumber}" class="page-item" >
+                        <a th:text="${pageNumber}" class="page-link" th:href="@{/(page=${pageNumber})}">100</a>
+                    </li>
+
+                </th:block>
+                <li th:if="${currentPage < #lists.size(pageNumbers)}" class="page-item">
+                    <a class="page-link" th:href="@{/(page=${currentPage + 1})}">Suivant</a>
+                </li>
+                <li th:if="${currentPage >= #lists.size(pageNumbers)}" class="page-item disabled">
+                    <a class="page-link" th:href="@{/(page=${currentPage + 1})}">Suivant</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Titre</th>
+                <th scope="col">Exemplaires</th>
+            </tr>
+        </thead>
+        <tbody th:each="livre : ${livres}">
+            <th th:text="${livre.title}" scope="row">titre</th>
+            <th th:text="${#lists.size(livre.exemplaires)}" scope="row">titre</th>
+
+        </tbody>
+    </table>
+
+</div>
+
+<script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+</body>
+</html>
