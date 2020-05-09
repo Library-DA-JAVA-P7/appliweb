@@ -2,15 +2,12 @@ package com.library.appliweb.controller;
 
 
 import com.library.appliweb.beans.BookBean;
-import com.library.appliweb.beans.ExemplaireBean;
 import com.library.appliweb.configuration.ApplicationPropertiesConfiguration;
-import com.library.appliweb.proxies.MicroserviceLivresProxy;
+import com.library.appliweb.proxies.BooksProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.PagedResources;
-import org.springframework.hateoas.Resources;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,7 +18,7 @@ import java.util.List;
 public class AppliWebController {
 
     @Autowired
-    private MicroserviceLivresProxy LivresProxy;
+    private BooksProxy LivresProxy;
 
     @Autowired
     ApplicationPropertiesConfiguration appProperties;
