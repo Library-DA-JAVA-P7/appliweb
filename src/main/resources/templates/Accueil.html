@@ -36,19 +36,25 @@
         </nav>
     </div>
 
-    <table class="table">
-        <thead>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
             <tr>
                 <th scope="col">Titre</th>
                 <th scope="col">Exemplaires</th>
             </tr>
-        </thead>
-        <tbody th:each="livre : ${livres}">
-            <th th:text="${livre.title}" scope="row">titre</th>
-            <th th:text="${#lists.size(livre.exemplaires)}" scope="row">titre</th>
+            </thead>
+            <tbody th:each="livre : ${livres}">
 
-        </tbody>
-    </table>
+                <th scope="row"><a th:href="@{/view(bookId=${livre.getId()})}" th:text="${livre.title}"></a></th>
+                <th th:text="${#lists.size(livre.exemplaires)}" scope="row">titre</th>
+
+
+
+            </tbody>
+        </table>
+    </div>
+
 
 </div>
 

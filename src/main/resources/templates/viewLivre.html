@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Accueil Bibliothèque</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <h1>Application Bibliothèque</h1>
+
+    <h2 th:text="${livre.title}">titre du livre</h2>
+    <em th:text="${livre.author}">auteur du livre</em>
+
+    <p th:text="${livre.synopsis}">
+        Synopsis
+    </p>
+
+    <p>Nombre d'exemplaires disponibles: <span th:text="${exemplairesDispo}"></span>/<span th:text="${#lists.size(livre.exemplaires)}"></span> </p>
+
+
+
+</div>
+
+<script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+</body>
+</html>
