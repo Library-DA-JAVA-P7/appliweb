@@ -8,7 +8,6 @@
 <body>
 <div class="container">
     <h1>Application Bibliothèque</h1>
-    <h2>Liste des livres</h2>
     <div class="row">
         <nav aria-label="...">
             <ul class="pagination">
@@ -42,13 +41,13 @@
             <thead>
             <tr>
                 <th scope="col">Titre</th>
-                <th scope="col">Exemplaires</th>
+                <th scope="col">Date Emprunt</th>
             </tr>
             </thead>
-            <tbody th:each="livre : ${livres}">
+            <tbody th:each="emprunt : ${emprunts}">
 
-                <th scope="row"><a th:href="@{/view(bookId=${livre.getId()})}" th:text="${livre.title}"></a></th>
-                <th th:text="${#lists.size(livre.exemplaires)}" scope="row">titre</th>
+            <th scope="row"><a th:href="@{/view(bookId=${emprunt.getBookId()})}" th:text="${emprunt.getBookTitle()}"></a></th>
+            <th th:text="${emprunt.getDateEmprunt()}" scope="row">dateEmprunt</th>
 
 
 

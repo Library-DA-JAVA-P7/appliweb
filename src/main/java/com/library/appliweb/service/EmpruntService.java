@@ -4,7 +4,9 @@ import com.library.appliweb.beans.EmpruntBean;
 import com.library.appliweb.beans.ExemplaireBean;
 import com.library.appliweb.proxies.BooksProxy;
 import com.library.appliweb.proxies.EmpruntsProxy;
+import com.library.appliweb.proxies.ExemplaireProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.PagedResources;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -18,14 +20,12 @@ public class EmpruntService {
     @Autowired
     private BooksProxy booksProxy;
 
+    @Autowired
+    private ExemplaireProxy exemplaireProxy;
+
 
     public Boolean isExemplaireDispo(int barcode) {
-
-        System.out.println("Code barre : " + barcode);
         Collection<EmpruntBean> emprunts = empruntsProxy.findByExemplaireBarcode(barcode).getContent();
-        System.out.println(emprunts.toString());
-
-        System.out.println(emprunts.toString());
 
         if (emprunts.isEmpty()) return true;
         Boolean returnValue = true;
@@ -50,5 +50,24 @@ public class EmpruntService {
         }
 
         return exemplairesDispo;
+    }
+
+    public PagedResources<EmpruntBean> getEmpruntsByUserId(String userId, int page, int size)
+    {
+        System.out.println("USER ID : " + userId +"\n" + "Page : " + page +"\n"+"Size : " + size);
+        PagedResources<EmpruntBean> emprunts = empruntsProxy.findByUserId(userId, page,size);
+
+        for (EmpruntBean emprunt:emprunts){
+            System.out.println("Barcode : " + emprunt.getExemplaireBarcode());
+            ExemplaireBean theExemplaire = exemplaireProxy.recupererExemplaire(emprunt.getExemplaireBarcode()).getContent();
+            System.out.println(theExemplaire.toString());
+            emprunt.setBookId(theExemplaire.getBook().getId());
+            emprunt.setBookTitle(theExemplaire.getBook().getTitle());
+
+
+        }
+
+
+        return emprunts;
     }
 }

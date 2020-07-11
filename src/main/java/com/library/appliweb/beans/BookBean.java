@@ -25,4 +25,23 @@ public class BookBean {
     private String synopsis;
     private List<ExemplaireBean> exemplaires = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "BookBean{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", titleSlug='" + titleSlug + '\'' +
+                ", authorSlug='" + authorSlug + '\'' +
+                ", isbn13=" + isbn13 +
+                ", isbn10=" + isbn10 +
+                ", format='" + format + '\'' +
+                ", pubDate=" + pubDate +
+                ", subjects='" + subjects + '\'' +
+                ", pages=" + pages +
+                ", overview='" + overview + '\'' +
+                ", synopsis='" + synopsis + '\'' +
+                ", exemplaires=" + exemplaires +
+                '}';
+    }
 }

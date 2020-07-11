@@ -9,6 +9,8 @@ public class EmpruntBean {
     private Long id;
     private String userId;
     private String exemplaireBarcode;
+    private int bookId;
+    private String bookTitle;
     private Date dateEmprunt;
     private Date dateRetour;
 }

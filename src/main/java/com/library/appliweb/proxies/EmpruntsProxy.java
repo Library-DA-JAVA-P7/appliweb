@@ -20,4 +20,7 @@ public interface EmpruntsProxy {
 
     @RequestMapping(method = RequestMethod.GET, value = "/emprunts/emprunts/search/findByExemplaireBarcode?exemplaireBarcode={exemplaireBarcode}")
     PagedResources<EmpruntBean> findByExemplaireBarcode(@PathVariable("exemplaireBarcode") int barcode);
+
+    @RequestMapping(method = RequestMethod.GET, value = "/emprunts/emprunts/search/findEmpruntEntitiesByUserId?userId={userId}&page={page}&size={size}")
+    PagedResources<EmpruntBean> findByUserId(@PathVariable("userId") String userId, @PathVariable("page") int page, @PathVariable("size") int size);
 }
