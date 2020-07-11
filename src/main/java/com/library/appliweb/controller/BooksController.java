@@ -43,6 +43,9 @@ public class BooksController {
         int size = appProperties.getLivresParPage();
         /** Attention, la numérotation des pages commence à 0 sur l'API !**/
         PagedResources<BookBean> livres = LivresProxy.listeDesLivres(page - 1, size);
+        for (BookBean livre:livres.getContent()) {
+            livre.setQuantiteDispo(empruntService.findExemplairesDispo(livre.getId()));
+        }
         Long totalPages = livres.getMetadata().getTotalPages();
         List<Integer> pageNumbers = new ArrayList<>();
         int thePage = 1;
@@ -85,6 +88,9 @@ public class BooksController {
         int size = appProperties.getLivresParPage();
         /** Attention, la numérotation des pages commence à 0 sur l'API !**/
         PagedResources<BookBean> livres = LivresProxy.rechercherUnLivre(page - 1, size, searchBean.getAuthor(), searchBean.getTitle());
+        for (BookBean livre:livres.getContent()) {
+            livre.setQuantiteDispo(empruntService.findExemplairesDispo(livre.getId()));
+        }
         Long totalPages = livres.getMetadata().getTotalPages();
         List<Integer> pageNumbers = new ArrayList<>();
         int thePage = 1;

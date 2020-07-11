@@ -1,8 +1,6 @@
 package com.library.appliweb.beans;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +21,7 @@ public class BookBean {
     private Integer pages;
     private String overview;
     private String synopsis;
+    private Integer quantiteDispo;
     private List<ExemplaireBean> exemplaires = new ArrayList<>();
 
     @Override
