@@ -13,4 +13,6 @@ public class EmpruntBean {
     private String bookTitle;
     private Date dateEmprunt;
     private Date dateRetour;
+    private Date dateRetourPrevu;
+    private Boolean isExtended;
 }

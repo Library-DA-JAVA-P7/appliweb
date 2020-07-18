@@ -40,14 +40,31 @@
         <table class="table table-hover">
             <thead>
             <tr>
+                <th scope="col">Emprunnt Id</th>
                 <th scope="col">Titre</th>
                 <th scope="col">Date Emprunt</th>
+                <th scope="col">Retour prévu</th>
+                <th scope="col">prolonger</th>
             </tr>
             </thead>
             <tbody th:each="emprunt : ${emprunts}">
+            <tr th:if="${emprunt.getDateRetour() == null}">
+                <td th:text="${emprunt.getId()}">Emprunt Id</td>
+                <td><a th:href="@{/view(bookId=${emprunt.getBookId()})}" th:text="${emprunt.getBookTitle()}"></a></td>
+                <td th:text="${#dates.format(emprunt.getDateEmprunt(), 'dd/MM/yyyy')}" scope="row">dateEmprunt</td>
+                <td th:text="${#dates.format(emprunt.getDateRetourPrevu(), 'dd/MM/yyyy')}" scope="row">dateRetourPrevu</td>
+                <td scope="row">
+                    <span th:if="${emprunt.getDateRetourPrevu().after(#dates.createNow()) and emprunt.getIsExtended() == false}">
+                        <a class="btn btn-primary" th:href="@{/emprunts/prolonge(empruntId=${emprunt.getId()})}" role="button">Prolonger</a>
+                    </span>
+                    <span th:if="${emprunt.getDateRetourPrevu().before(#dates.createNow()) or emprunt.getIsExtended() == true }">
+                        <a class="btn btn-secondary" href="#" role="button">Prolonger</a>
+                    </span>
+                </td>
 
-            <th scope="row"><a th:href="@{/view(bookId=${emprunt.getBookId()})}" th:text="${emprunt.getBookTitle()}"></a></th>
-            <th th:text="${emprunt.getDateEmprunt()}" scope="row">dateEmprunt</th>
+
+            </tr>
+
 
 
 
